@@ -6,6 +6,7 @@ import { sidebar, sidebarOption } from "./sidebar"
 import { obs, fetching_obs } from "./obs"
 import { location } from "./location"
 import { form } from "./form"
+import { beds } from "./beds"
 import { session } from "./session"
 import { encounterType } from "./encounterType"
 import { provider } from "./provider"
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   obs,
   location,
   form,
+  beds,
   session,
   encounterType,
   provider,

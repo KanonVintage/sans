@@ -61,7 +61,7 @@ export function fetchActiveVisits(input) {
           if (input) {
             visits.results = visits.results.filter(visit => (visit.patient.display.indexOf(input) !== -1 || visit.location.display.indexOf(input) !== -1 || visit.visitType.display.indexOf(input) !== -1))
           }
-          console.info("Visitas: ", visits.results)
+          //console.info("Visitas: ", visits.results)
           dispatch(receivedActiveVisits(visits))
         } else {
           dispatch(receivedActiveVisits({ results: [] }))

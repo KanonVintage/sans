@@ -14,7 +14,7 @@ export function fetchProvider(userUUID) {
   return (dispatch) => {
     try {
       apiCall(null, "get", `/provider/?user=${userUUID}`).then((result) => {
-        console.info("resultado: ", result)
+        //console.info("resultado: ", result)
         dispatch(receivedProvider(result.results[0]))
       }, (error) => {
         console.error("Something happened...", error)

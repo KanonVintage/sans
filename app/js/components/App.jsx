@@ -19,8 +19,8 @@ export default class App extends React.Component {
 
   /*Si props existe*/
   componentDidMount(){
-    console.info(this.props.router)
-   this.props.router.push('/search');
+    console.info(this.props/*.router*/)
+    //this.props.router.push('/search');
   }
 
   render() {

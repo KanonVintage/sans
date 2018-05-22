@@ -9,16 +9,14 @@ class Beds extends Component {
   }
 
   loadBeds(){
-    console.log("fetching beds")
+    //console.log(this.props)
     this.props.fetchEmergencyBeds()
   }
 
   render() {
     return (
       <div className="container-fluid">
-        <Nav pullRight>
-          <span id="loadBeds" onClick={this.loadBeds}>&#9776;</span>
-        </Nav>
+          <button id="loadBeds" onClick={this.loadBeds}>&#9776;</button>
       </div>
     )
   }

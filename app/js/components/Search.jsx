@@ -59,7 +59,7 @@ class Search extends Component {
     this.props.changeSidebarOption(2)
     // this.props.fetchLocation(this.props.visitSelected)
     // this.props.fetchForm()
-    hashHistory.push("/vitals")
+    hashHistory.push("/search")
   }
   cancelConfirmModal() {
     this.setState({
@@ -139,8 +139,7 @@ class Search extends Component {
               type="text"
               value={this.state.input}
               placeholder=""
-              onChange={this.handleChange}
-            />
+              onChange={this.handleChange}/>
             <FormControl.Feedback />
             <HelpBlock>Ingrese Nombre de Paciente, Tipo de Visita o Localizacion</HelpBlock>
           </FormGroup>
