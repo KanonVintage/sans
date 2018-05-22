@@ -8,10 +8,7 @@
  */
 import React from 'react'
 import App from "./containers/App"
-import Drawer from "./containers/Drawer"
-import Menu from "./containers/Menu"
 import Search from "./containers/Search"
-import Vitals from "./containers/Vitals"
 import Beds from "./containers/Beds"
 import {Route} from 'react-router'
 
@@ -22,7 +19,6 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
     	<Route path="search" component={Search}/>
-    	<Route path="vitals" component={Vitals}/>
     </Route>
   )
 }

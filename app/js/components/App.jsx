@@ -7,7 +7,6 @@
  * graphic logo is a trademark of OpenMRS Inc.
  */
 import React, { Component } from "react"
-import Menu from "../containers/Menu"
 import Beds from "../containers/Beds"
 import { Grid } from "react-bootstrap"
 
@@ -28,13 +27,12 @@ export default class App extends React.Component {
     return (
       <div>
         {/*Tecnicamente este es el sidenav*/}
-        <Menu />
-        <Beds />
         {/*Literalmente este es el main app*/}
         <Grid id="mainApp">
           {/*Aqui se construye todo lo declarado en routes*/}
           { this.props.children }
         </Grid>
+        <Beds />
       </div>
     )
   }
