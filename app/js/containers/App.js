@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import BedList from '../components/BedList';
+import PatientList from '../components/PatientList';
 import GifList from '../components/GifList';
 import GifModal from '../components/GifModal';
 import SearchBar from '../components/SearchBar';
@@ -11,6 +12,7 @@ import '../styles/app.css';
 class App extends React.Component {
     componentDidMount(){
         this.props.actions.fetchEmergencyBeds()
+        this.props.actions.fetchActiveVisits()
         console.info(this.props)
     }
 
@@ -18,6 +20,7 @@ class App extends React.Component {
         return (
             <div>
                 <BedList beds={ this.props.beds }/>
+                <PatientList patients={ this.props.patients }/> 
                 <SearchBar onTermChange={this.props.actions.requestGifs} />
                 <GifList gifs={ this.props.gifs } onGifSelect={ selectedGif => this.props.actions.openModal({selectedGif}) } />
                 <GifModal modalIsOpen={ this.props.modalIsOpen }
@@ -31,6 +34,7 @@ class App extends React.Component {
 function mapStateToProps(state) {
     return {
         beds: state.beds.cama,
+        patients: state.patients.data,
         gifs: state.gifs.data,
         modalIsOpen: state.modal.modalIsOpen,
         selectedGif: state.modal.selectedGif
