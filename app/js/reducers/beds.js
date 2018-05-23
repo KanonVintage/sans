@@ -1,16 +1,16 @@
-import { FETCH_EMERGENCY_BEDS, RECEIVED_EMERGENCY_BEDS } from "../actions/Beds"
+import { FETCH_EMERGENCY_BEDS } from '../actions';
 
-function beds(state = {}, action) {
-  switch (action.type) {
-    case FETCH_EMERGENCY_BEDS: {
-      return state
+const initialState =  {
+    cama: []
+};
+
+export default function beds(state = initialState, action) {
+    switch (action.type) {
+        case FETCH_EMERGENCY_BEDS:
+            return Object.assign({},state,{
+                cama: action.payload.bedLayouts
+            })
+        default:
+            return state;
     }
-    case RECEIVED_EMERGENCY_BEDS: {
-      return action.payload
-    }
-    default:
-      return state
-  }
 }
-
-export { beds }

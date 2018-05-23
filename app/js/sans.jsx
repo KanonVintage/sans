@@ -1,27 +1,14 @@
-/* * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, You can
- * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
- * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
- * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
- * graphic logo is a trademark of OpenMRS Inc.
- */
 import React from 'react';
-import {render} from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router'
-import {Provider} from 'react-redux'
-import { syncHistoryWithStore } from "react-router-redux"
+import ReactDOM from 'react-dom';
+import App from './containers/App';
+import { Provider } from 'react-redux';
+import configureStore from './utilities/configureStore';
 
-import createStore from './redux-store'
-import routes from './routes'
+const store = configureStore();
 
-//let store = createStore();
-const store = createStore()
-
-render((
-         <Provider store={store}>
-           <Router history={hashHistory}>
-             {routes(store)}
-           </Router>
-         </Provider>
-       ), document.getElementById('app'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
+);
