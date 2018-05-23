@@ -20,8 +20,8 @@ class App extends React.Component {
         return (
             <div>
                 <BedList beds={ this.props.beds }/>
-                <PatientList patients={ this.props.patients }/> 
                 <SearchBar onTermChange={this.props.actions.requestGifs} />
+                <PatientList patients={ this.props.patients }/> 
                 <GifList gifs={ this.props.gifs } onGifSelect={ selectedGif => this.props.actions.openModal({selectedGif}) } />
                 <GifModal modalIsOpen={ this.props.modalIsOpen }
                           selectedGif={ this.props.selectedGif }
