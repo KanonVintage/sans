@@ -3,11 +3,12 @@ import BedItem from './BedItem';
 
 const BedList = (props) => {
     const bedItems = props.beds.map((bed) => {
-        return <BedItem key={bed.bedId} bed={bed} />
+        return <BedItem key={bed.bedId} 
+        				bed={bed} />
     });
 
     return (
-        <div className="bed-list">{bedItems}</div>
+        <div className="bed-list gif-list bed-layout-row">{bedItems}</div>
     );
 };
 

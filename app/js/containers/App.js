@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import * as Actions from '../actions';
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import BedList from '../components/BedList';
 import PatientList from '../components/PatientList';
 import GifList from '../components/GifList';
 import GifModal from '../components/GifModal';
 import SearchBar from '../components/SearchBar';
+
 import '../styles/app.css';
+import '../styles/bedlayout.css';
 
 class App extends React.Component {
     componentDidMount(){
@@ -19,10 +25,10 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <BedList beds={ this.props.beds }/>
                 <SearchBar onTermChange={this.props.actions.requestGifs} />
-                <PatientList patients={ this.props.patients }/> 
-                <GifList gifs={ this.props.gifs } onGifSelect={ selectedGif => this.props.actions.openModal({selectedGif}) } />
+                <PatientList patients={ this.props.patients }/>
+                <BedList beds={ this.props.beds }/>
+                <GifList gifs={ this.props.gifs } onGifSelect={ (selectedGif) => this.props.actions.openModal({selectedGif}) } />
                 <GifModal modalIsOpen={ this.props.modalIsOpen }
                           selectedGif={ this.props.selectedGif }
                           onRequestClose={ () => this.props.actions.closeModal() } />
@@ -47,4 +53,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+    DragDropContext(HTML5Backend),
+    connect(mapStateToProps, mapDispatchToProps)
+)(App);

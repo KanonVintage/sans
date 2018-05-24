@@ -26,10 +26,10 @@ const PatientList = (props) => {
             			</th>
            			</tr>
           		</thead>
-          		<tbody>
-            		{patientItems}
-          		</tbody>
           	</table>
+          	<div className="bed-list gif-list bed-layout-row">
+        		{patientItems}
+      		</div>
         </div>
     );
 };
