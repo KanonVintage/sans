@@ -10,9 +10,10 @@ export const REQUEST_GIFS = 'REQUEST_GIFS';
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = '&api_key=dc6zaTOxFJmzC';
 
-//beds
+//beds, patients, pacman in that same order
 export const FETCH_EMERGENCY_BEDS = 'FETCH_EMERGENCY_BEDS';
 export const FETCH_ACTIVE_VISITS = 'FETCH_ACTIVE_VISITS';
+export const OPEN_PACMAN = 'OPEN_PACMAN';
 
 //load beds section
 export function receivedEmergencyBeds(cama = {}) {
@@ -63,6 +64,7 @@ export function fetchActiveVisits(input) {
   }
 }
 
+//obtener los gifs, no voy a borrar esto pls.
 export function requestGifs(term = null) {
     const data = request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`);
 
@@ -73,10 +75,17 @@ export function requestGifs(term = null) {
 }
 
 export function openModal(gif) {
-    return {
-        type: OPEN_MODAL,
-        gif
-    }
+  return {
+      type: OPEN_MODAL,
+      gif
+  }
+}
+
+export function openPacman(ids) {
+  return {
+      type: OPEN_PACMAN,
+      payload: ids
+  }
 }
 
 export function closeModal() {

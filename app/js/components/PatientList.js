@@ -10,22 +10,6 @@ const PatientList = (props) => {
     return (
         <div className="patient-list">
         	<table className="table table-bordered table-hover">
-        		<thead>
-            		<tr>
-              			<th>
-              				Nombre del Paciente
-            			</th>
-              			<th>
-              				Lugar de Visita
-            			</th>
-              			<th>
-              				Tipo de Visita
-            			</th>
-              			<th>
-              				Fecha de Visita
-            			</th>
-           			</tr>
-          		</thead>
           	</table>
           	<div className="bed-list gif-list bed-layout-row">
         		{patientItems}
@@ -36,4 +20,21 @@ const PatientList = (props) => {
 
 export default PatientList;
 
-//<div className="patient-list">{patientItems}</div>
+/*<div className="patient-list">{patientItems}</div>
+<thead>
+<tr>
+	<th>
+		Nombre del Paciente
+</th>
+	<th>
+		Lugar de Visita
+</th>
+	<th>
+		Tipo de Visita
+</th>
+	<th>
+		Fecha de Visita
+</th>
+</tr>
+</thead>
+*/

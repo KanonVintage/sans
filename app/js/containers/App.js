@@ -11,6 +11,7 @@ import PatientList from '../components/PatientList';
 import GifList from '../components/GifList';
 import GifModal from '../components/GifModal';
 import SearchBar from '../components/SearchBar';
+import PacModal from '../components/PacModal';
 
 import '../styles/app.css';
 import '../styles/bedlayout.css';
@@ -26,9 +27,17 @@ class App extends React.Component {
         return (
             <div>
                 <SearchBar onTermChange={this.props.actions.requestGifs} />
+
                 <PatientList patients={ this.props.patients }/>
-                <BedList beds={ this.props.beds }/>
-                <GifList gifs={ this.props.gifs } onGifSelect={ (selectedGif) => this.props.actions.openModal({selectedGif}) } />
+                <BedList beds={ this.props.beds } onMove={
+                    ({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } />
+                <PacModal pacmanIsOpen={ this.props.pacmanIsOpen }
+                          sourceId={ this.props.sourceId }
+                          targetId={ this.props.targetId }
+                          onRequestClose={ () => this.props.actions.closeModal() } />
+
+                <GifList gifs={ this.props.gifs } onGifSelect={ 
+                    (selectedGif) => this.props.actions.openModal({selectedGif}) } />
                 <GifModal modalIsOpen={ this.props.modalIsOpen }
                           selectedGif={ this.props.selectedGif }
                           onRequestClose={ () => this.props.actions.closeModal() } />
@@ -43,7 +52,10 @@ function mapStateToProps(state) {
         patients: state.patients.data,
         gifs: state.gifs.data,
         modalIsOpen: state.modal.modalIsOpen,
-        selectedGif: state.modal.selectedGif
+        selectedGif: state.modal.selectedGif,
+        pacmanIsOpen: state.pacman.pacmanIsOpen,
+        sourceId: state.pacman.sourceId,
+        targetId: state.pacman.targetId
     };
 }
 

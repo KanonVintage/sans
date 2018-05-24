@@ -4,7 +4,8 @@ import BedItem from './BedItem';
 const BedList = (props) => {
     const bedItems = props.beds.map((bed) => {
         return <BedItem key={bed.bedId} 
-        				bed={bed} />
+        				bed={bed} 
+        				onMove={props.onMove}/>
     });
 
     return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from "moment";
 import { DragSource } from 'react-dnd';
+import ItemTypes from '../utilities/itemTypes'
 
 class PatientItem extends React.Component{
 	render(){
@@ -27,16 +28,6 @@ class PatientItem extends React.Component{
 				        </tr>
 				        <tr>
 				          	<td className="info">
-				            	{ props.patient.location.display }
-				          	</td>
-				        </tr>
-				        <tr>
-				          	<td className="info">
-				            	{ props.patient.visitType.display }
-				          	</td>
-				        </tr>
-				        <tr>
-				          	<td className="info">
 				            	{ date }
 				          	</td>
 				        </tr>
@@ -47,18 +38,28 @@ class PatientItem extends React.Component{
 	}
 };
 
-const workDragSource = {
+const patientDragSource = {
   beginDrag(props) {
-  	console.info("you messing with",props.patient.patient.display)
-    return {}
+    return {id:props.patient.patient};
   }
 }
 
-export default DragSource('DRAG_WORK', workDragSource, function(connect) {
+export default DragSource(ItemTypes.PACMAN, patientDragSource, function(connect) {
     return {
       connectDragSource: connect.dragSource(),
     };
   })(PatientItem);
 /*<div className="patient-item">
 	<span id="loadBeds" onClick={() => console.log(props.patient)}>{props.patient.patient.display}</span>
-</div>*/
+</div>
+
+<tr>
+  	<td className="info">
+    	{ props.patient.location.display }
+  	</td>
+</tr>
+<tr>
+  	<td className="info">
+    	{ props.patient.visitType.display }
+  	</td>
+</tr>*/

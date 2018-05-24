@@ -8,6 +8,7 @@ const initialState =  {
 export default function modal(state = initialState, action) {
     switch(action.type) {
         case OPEN_MODAL:
+            console.log(action)
             return Object.assign({},state,{
                 modalIsOpen: true,
                 selectedGif: action.gif.selectedGif
@@ -21,3 +22,5 @@ export default function modal(state = initialState, action) {
             return state;
     }
 }
+
+//selectedGif: action.payload.selectedGif
