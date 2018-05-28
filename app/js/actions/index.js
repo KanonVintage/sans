@@ -14,6 +14,7 @@ const API_KEY = '&api_key=dc6zaTOxFJmzC';
 export const FETCH_EMERGENCY_BEDS = 'FETCH_EMERGENCY_BEDS';
 export const FETCH_ACTIVE_VISITS = 'FETCH_ACTIVE_VISITS';
 export const OPEN_PACMAN = 'OPEN_PACMAN';
+export const PACMAN_SET = 'PACMAN_SET';
 
 //load beds section
 export function receivedEmergencyBeds(cama = {}) {
@@ -29,7 +30,7 @@ export function fetchEmergencyBeds() {
         dispatch(receivedEmergencyBeds(result))
       })
     } catch (e) {
-      console.error("Something weird happened in Beds.js...", e)
+      console.error("Something weird happened in fetchingEmergencyBeds.js...", e)
     }
   }
 }
@@ -58,8 +59,57 @@ export function fetchActiveVisits(input) {
         }
       })
     } catch (e) {
-      console.error("Something weird happened...", e)
+      console.error("Something weird happened fetching patients...", e)
       dispatch(receivedActiveVisits({ results: [] }))
+    }
+  }
+}
+
+
+export function responsePacman(data) {
+  return {
+    type: PACMAN_SET,
+    data
+  }
+}
+export function setPacman(sourceId, targetId){
+  const v ={}
+  v.patientUuid = sourceId.patient.uuid
+  v.encounterUuid = sourceId.encounters[0].uuid
+
+  return (dispatch) => {
+    if(targetId.patient==null){
+      try {
+        apiCall(v, "post", `beds/`+targetId.bedId+`?purge=true`).then((result) => {
+          //console.log(result)
+          dispatch(responsePacman(result))
+          window.location.reload();
+        })
+      } catch (e) {
+        console.error("Something weird happened in Beds.js...", e)
+      }
+    }else{
+      return{
+        type: PACMAN_SET,
+        bed
+      }
+    }
+  }
+}
+export function deletePacman(targetId){
+  const v ={}
+  v.patientUuid = targetId.patient.uuid;
+  console.log(targetId.patient.uuid)
+  console.log(targetId.bedId)
+  return (dispatch) => {
+    try {
+      apiCall(v, "delete", `beds/`+targetId.bedId+`/`).then((result) => {
+          console.log(result)
+          dispatch(responsePacman(result))
+          //window.location.reload();
+        })
+    } catch (e) {
+      console.error("Something weird happened in deleting the assignment.js...", e)
     }
   }
 }

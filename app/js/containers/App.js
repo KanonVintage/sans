@@ -17,23 +17,29 @@ import '../styles/app.css';
 import '../styles/bedlayout.css';
 
 class App extends React.Component {
-    componentDidMount(){
+    componentWillMount(){
         this.props.actions.fetchEmergencyBeds()
         this.props.actions.fetchActiveVisits()
+    }
+    componentDidMount(){
         console.info(this.props)
     }
 
     render() {
         return (
             <div>
-                <SearchBar onTermChange={this.props.actions.requestGifs} />
+                {/*<SearchBar onTermChange={this.props.actions.requestGifs} />*/}
 
                 <PatientList patients={ this.props.patients }/>
-                <BedList beds={ this.props.beds } onMove={
-                    ({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } />
+
+                <BedList beds={ this.props.beds } 
+                         onMove={({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } 
+                         onDeletePatient={(targetId)=>this.props.actions.deletePacman(targetId)}/>
+
                 <PacModal pacmanIsOpen={ this.props.pacmanIsOpen }
                           sourceId={ this.props.sourceId }
                           targetId={ this.props.targetId }
+                          onRequestSetPacman={ ()=> this.props.actions.setPacman(this.props.sourceId, this.props.targetId)}
                           onRequestClose={ () => this.props.actions.closeModal() } />
 
                 <GifList gifs={ this.props.gifs } onGifSelect={ 

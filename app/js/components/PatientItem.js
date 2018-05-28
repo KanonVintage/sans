@@ -40,7 +40,8 @@ class PatientItem extends React.Component{
 
 const patientDragSource = {
   beginDrag(props) {
-    return {id:props.patient.patient};
+  	//console.log(props.patient)
+    return {id:props.patient};
   }
 }
 

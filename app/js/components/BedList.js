@@ -5,7 +5,8 @@ const BedList = (props) => {
     const bedItems = props.beds.map((bed) => {
         return <BedItem key={bed.bedId} 
         				bed={bed} 
-        				onMove={props.onMove}/>
+        				onMove={props.onMove}
+        				unAssign={props.onDeletePatient}/>
     });
 
     return (

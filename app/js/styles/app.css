@@ -3,6 +3,10 @@
     width: 90%;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .gif-item {
     box-shadow: 2px 2px 4px 0 #ccc;
     box-sizing: border-box;
