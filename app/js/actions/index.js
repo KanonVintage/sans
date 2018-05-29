@@ -2,6 +2,7 @@ import request from 'superagent';
 import apiCall from "../utilities/apiHelper"
 import { ENCOUNTER_TYPE_UUID } from "../utilities/constants"
 import { EMERGENCY_AREA_UUID } from "../utilities/constants"
+import axios from 'axios';
 
 //gifs easteregg
 export const OPEN_MODAL = 'OPEN_MODAL';
@@ -47,6 +48,7 @@ export function fetchActiveVisits(input) {
     try {
       apiCall(null, "get", "/visit?v=default")
       .then((visits) => {
+        //console.log(visits)
         if (visits.results && Array.isArray(visits.results) && visits.results.length > 0) {
           visits.results = visits.results.filter(visit => visit.stopDatetime == null)
           if (input) {
@@ -80,7 +82,7 @@ export function setPacman(sourceId, targetId){
   return (dispatch) => {
     if(targetId.patient==null){
       try {
-        apiCall(v, "post", `beds/`+targetId.bedId+`?purge=true`).then((result) => {
+        apiCall(v, "post", `beds/`+targetId.bedId+`/`).then((result) => {
           //console.log(result)
           dispatch(responsePacman(result))
           window.location.reload();
@@ -98,16 +100,18 @@ export function setPacman(sourceId, targetId){
 }
 export function deletePacman(targetId){
   const v ={}
-  v.patientUuid = targetId.patient.uuid;
-  console.log(targetId.patient.uuid)
+  v.patientUuid = targetId.patient.uuid
+  v.bedId = targetId.bedId
+
+  console.log(v)
   console.log(targetId.bedId)
   return (dispatch) => {
     try {
-      apiCall(v, "delete", `beds/`+targetId.bedId+`/`).then((result) => {
-          console.log(result)
-          dispatch(responsePacman(result))
-          //window.location.reload();
-        })
+      apiCall(v, "delete", `beds/`+targetId.bedId+`?patientUuid=`+targetId.patient.uuid).then((result) => {
+        console.log(result)
+        dispatch(responsePacman(result))
+        window.location.reload();
+      })  
     } catch (e) {
       console.error("Something weird happened in deleting the assignment.js...", e)
     }
