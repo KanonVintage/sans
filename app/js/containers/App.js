@@ -12,34 +12,44 @@ import GifList from '../components/GifList';
 import GifModal from '../components/GifModal';
 import SearchBar from '../components/SearchBar';
 import PacModal from '../components/PacModal';
+import Return from '../components/Return';
 
 import '../styles/app.css';
 import '../styles/bedlayout.css';
 
 class App extends React.Component {
     componentWillMount(){
-        this.props.actions.fetchEmergencyBeds()
-        this.props.actions.fetchActiveVisits()
+        //this.props.actions.fetchInitialData();
+        /*this.props.actions.fetchActiveVisits()
+        this.props.actions.fetchEmergencyBeds()*/
     }
     componentDidMount(){
-        console.info(this.props)
+        this.props.actions.fetchInitialData();
+        //console.info(this.props)
     }
 
     render() {
         return (
             <div>
                 {/*<SearchBar onTermChange={this.props.actions.requestGifs} />*/}
-
                 <PatientList patients={ this.props.patients }/>
+                
+                <form>
+                    <fieldset>
+                        <legend>Camas disponibles</legend>
+                        <BedList beds={ this.props.beds } 
+                                 onMove={({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } 
+                                 onDeletePatient={(targetId)=>this.props.actions.deletePacman(targetId)}/>
+                    </fieldset>
+                </form>
 
-                <BedList beds={ this.props.beds } 
-                         onMove={({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } 
-                         onDeletePatient={(targetId)=>this.props.actions.deletePacman(targetId)}/>
+                <Return onMove={({sourceId, targetId}) => this.props.actions.openPacman({sourceId, targetId}) } />
 
                 <PacModal pacmanIsOpen={ this.props.pacmanIsOpen }
                           sourceId={ this.props.sourceId }
                           targetId={ this.props.targetId }
                           onRequestSetPacman={ ()=> this.props.actions.setPacman(this.props.sourceId, this.props.targetId)}
+                          onRequestDelVisit={ ()=> this.props.actions.deleteVisit(this.props.sourceId)}
                           onRequestClose={ () => this.props.actions.closeModal() } />
 
                 <GifList gifs={ this.props.gifs } onGifSelect={ 
@@ -52,10 +62,12 @@ class App extends React.Component {
     }
 }
 
+
+
 function mapStateToProps(state) {
     return {
-        beds: state.beds.cama,
-        patients: state.patients.data,
+        beds: state.init.beds,
+        patients: state.init.patients,
         gifs: state.gifs.data,
         modalIsOpen: state.modal.modalIsOpen,
         selectedGif: state.modal.selectedGif,

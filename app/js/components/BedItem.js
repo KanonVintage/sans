@@ -5,6 +5,7 @@ import ItemTypes from '../utilities/itemTypes'
 class BedItem extends React.Component{
 	render(){
 		let props = this.props;
+		const contextPath = location.href.split('/')[2]
 		if(this.props.bed.patient==null){
 			return props.connectDropTarget(
 		        <div className="bed-item gif-item block bg-success">
@@ -26,6 +27,8 @@ class BedItem extends React.Component{
 		        </div>
 		    )
 		}else{
+			const BASE_URL = `http://${contextPath}/openmrs/coreapps/clinicianfacing/patient.page?patientId=${props.bed.patient.uuid}`
+			//console.log(BASE_URL)
 			return props.connectDropTarget(
 		        <div className="bed-item gif-item block bg-danger">
 		            <div className="left-block">
@@ -34,16 +37,17 @@ class BedItem extends React.Component{
 		                </i>
 		                <div>
 				            <pre className="text-center">{props.bed.bedNumber}
-				            <p className="glyphicon glyphicon-remove col-sm-2"
-				               onClick={() => props.unAssign(props.bed)}></p>
+				            
 				            </pre>
 				        </div>
 		            </div>
-		            <div className="bb-work bb-work-placeholder row" />
+		            	
 		            <ul className="right-block">
 		                <li>
 		                    <span>
-		                    	{props.bed.patient.person.preferredName.givenName} {props.bed.patient.person.preferredName.familyName}
+		                    	<a href={BASE_URL} target="_blank">
+		                    		{props.bed.patient.person.preferredName.givenName} {props.bed.patient.person.preferredName.familyName}
+		                    	</a>
 		                    </span>
 		                </li>
 		                <li>
@@ -61,7 +65,9 @@ const patientDragTarget = {
   	const targetId = targetProps.bed;
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
-    targetProps.onMove({sourceId, targetId});
+    //if (sourceProps.id.bedId==null){
+    	targetProps.onMove({sourceId, targetId});
+    //}
   }
 }
 
@@ -78,3 +84,9 @@ export default DropTarget(ItemTypes.PACMAN, patientDragTarget, function(connect)
     )*/
 
 /*const BedItem = (props) => {*/
+
+
+/*To unassign a patient
+<p className="glyphicon glyphicon-remove col-sm-2"
+       onClick={() => props.unAssign(props.bed)}>
+</p>*/

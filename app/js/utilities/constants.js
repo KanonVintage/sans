@@ -3,3 +3,9 @@ export const PULSE_UUID = "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 export const ENCOUNTER_TYPE_UUID = "67a71486-1a54-468f-ac3e-7091a9a79584"
 export const EMERGENCY_AREA_UUID = "b3b562b2-a7d9-41b6-8b60-9d257754f004"
 export const DEFAULT_PROVIDER = "nurse"
+
+
+/*original"b3b562b2-a7d9-41b6-8b60-9d257754f004"*/
+/*espolserver"162346e1-2e7c-45c0-bf92-708580467882"*/
+/*"b3b562b2-a7d9-41b6-8b60-9d257754f004"*/
+/*apache af800c5a-27d2-4685-b42f-56ab05838edc*/

@@ -6,20 +6,25 @@ const PatientList = (props) => {
     	//console.log(visit.patient)
         return <PatientItem key={visit.uuid} patient={visit} />
     });
-
     return (
         <div className="patient-list">
-        	<table className="table table-bordered table-hover">
-          	</table>
+          <form>
+            <fieldset>
+              <legend>Pacientes</legend>
+          	
           	<div className="bed-list gif-list bed-layout-row">
-        		{patientItems}
-      		</div>
+          		{patientItems}
+        		</div>
+          </fieldset>
+          </form>
         </div>
     );
 };
 
 export default PatientList;
-
+/*          <table className="table table-bordered table-hover">
+            
+            <div className="bed-list gif-list bed-layout-row">
 /*<div className="patient-list">{patientItems}</div>
 <thead>
 <tr>

@@ -5,11 +5,13 @@
  *
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
+
+ ***max-width: 1000px;***
  */
 body {
     font-family: "OpenSans", Arial, sans-serif;
     -webkit-font-smoothing: subpixel-antialiased;
-    max-width: 1000px;
+    max-width: 90%;
     margin: 10px auto;
     background: #eeeeee;
     color: #363463;

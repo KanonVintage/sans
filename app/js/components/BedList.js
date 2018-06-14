@@ -8,9 +8,10 @@ const BedList = (props) => {
         				onMove={props.onMove}
         				unAssign={props.onDeletePatient}/>
     });
-
     return (
-        <div className="bed-list gif-list bed-layout-row">{bedItems}</div>
+        <div className="bed-list gif-list">
+        	{bedItems}
+        </div>
     );
 };
 

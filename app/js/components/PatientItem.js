@@ -17,24 +17,45 @@ class PatientItem extends React.Component{
 	    } catch (e) {
 	      console.error("Cannot change the display from patient. ", patient)
 	    }
-	    return props.connectDragSource(
-	    	<div className="gif-item">
-		    	<table className="table table-hover table-bordered ">
-			    	<tbody>
-				    	<tr>
-				          	<td className="info">
-				            	{ patient }
-				          	</td>
-				        </tr>
-				        <tr>
-				          	<td className="info">
-				            	{ date }
-				          	</td>
-				        </tr>
-			        </tbody>
-		        </table>
-	        </div>
-	    )
+	    if(props.patient.bed==0){
+		    return props.connectDragSource(
+		    	<div className="gif-item block">
+			    	<table className="table table-hover table-bordered ">
+				    	<tbody>
+					    	<tr>
+					          	<td className="info">
+					            	{ patient }
+					          	</td>
+					        </tr>
+					        <tr>
+					          	<td className="info">
+					            	{ date }
+					          	</td>
+					        </tr>
+				        </tbody>
+			        </table>
+		        </div>
+		    )
+		}else{
+			return props.connectDragSource(
+		    	<div className="gif-item block bg-primary">
+			    	<table className="table text-muted disable disabled">
+				    	<tbody>
+					    	<tr>
+					          	<td className="danger">
+					            	{ patient }
+					          	</td>
+					        </tr>
+					        <tr>
+					          	<td className="danger">
+					            	{ date }
+					          	</td>
+					        </tr>
+				        </tbody>
+			        </table>
+		        </div>
+		    )
+		}
 	}
 };
 
